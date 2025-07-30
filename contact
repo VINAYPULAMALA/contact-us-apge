@@ -399,7 +399,7 @@
     <script>
         // EmailJS Configuration
         const EMAIL_CONFIG = {
-            serviceId: 'casadeamorinfo@gmail.com',
+            serviceId: 'service_ar10rnj',
             issueTemplateId: 'template_bjh7sm3',
             enquiryTemplateId: 'template_l9an0sq',
             publicKey: 'i5TYdclyR0ihs1ZxG',
