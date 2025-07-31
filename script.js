@@ -2,14 +2,18 @@
 
 'use strict';
 
+/* Contact Form JavaScript - Production Version */
+
+'use strict';
+
 /* Configuration */
 const CONFIG = {
     email: {
-        serviceId: 'service_ar10rnj',
-        issueTemplateId: 'template_bjh7sm3',
-        enquiryTemplateId: 'template_l9an0sq',
-        publicKey: 'i5TYdclyR0ihs1ZxG',
-        adminEmail: 'casadeamorinfo@gmail.com'
+        serviceId: 'service_6jnewbb',            // ✅ Your working Service ID
+        issueTemplateId: 'template_bjh7sm3',     // ✅ Your Issue Template
+        enquiryTemplateId: 'template_l9an0sq',   // ✅ Your Enquiry Template
+        publicKey: 'i5TYdclyR0ihs1ZxG',         // ✅ Your Public Key
+        adminEmail: 'casadeamorinfo@gmail.com'   // ✅ Your Email
     },
     validation: {
         name: {
