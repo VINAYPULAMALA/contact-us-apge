@@ -4,235 +4,220 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contact Us - Casa de Amor</title>
-    
-    <!-- EmailJS SDK -->
     <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
-    
-    <!-- External Stylesheet -->
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <!-- Skip Link for Screen Readers -->
     <a href="#main-content" class="skip-link">Skip to main content</a>
-
-    <!-- Live Region for Form Status Announcements -->
-    <div id="form-status" class="sr-only" aria-live="polite" aria-atomic="true"></div>
+    <div id="form-status" class="sr-only" aria-live="polite"></div>
 
     <!-- Success Popup -->
     <div class="popup-overlay" id="popup-overlay" aria-hidden="true"></div>
-    <div class="success-popup" id="success-popup" role="dialog" aria-modal="true" aria-labelledby="popup-title" aria-describedby="popup-message" aria-hidden="true">
+    <div class="success-popup" id="success-popup" role="dialog" aria-modal="true" aria-labelledby="popup-title" aria-hidden="true">
         <h3 id="popup-title">✅ Success!</h3>
         <p id="popup-message">Your submission has been received.</p>
-        <button class="submit-btn popup-close-btn" id="popup-close" aria-label="Close success message">Close</button>
+        <button class="submit-btn popup-close-btn" id="popup-close">Close</button>
     </div>
 
     <div class="container">
-        <header class="header" role="banner">
+        <header class="header">
             <h1>Contact Us</h1>
             <p>We're here to help with your issues and enquiries</p>
         </header>
 
-        <nav class="form-tabs" role="tablist" aria-label="Contact form options">
-            <button class="tab-button active" 
-                    data-tab="issue"
-                    role="tab" 
-                    aria-selected="true" 
-                    aria-controls="issue-form" 
-                    id="issue-tab"
-                    aria-label="Report an issue form">
+        <nav class="form-tabs" role="tablist">
+            <button class="tab-button active" data-tab="issue" role="tab" aria-selected="true" aria-controls="issue-form" id="issue-tab">
                 Report Issue
             </button>
-            <button class="tab-button" 
-                    data-tab="enquiry"
-                    role="tab" 
-                    aria-selected="false" 
-                    aria-controls="enquiry-form" 
-                    id="enquiry-tab"
-                    aria-label="Make an enquiry form">
+            <button class="tab-button" data-tab="enquiry" role="tab" aria-selected="false" aria-controls="enquiry-form" id="enquiry-tab">
                 Make Enquiry
             </button>
         </nav>
 
-        <main id="main-content" role="main">
+        <main id="main-content">
             <!-- Issue Form -->
             <section id="issue-form" class="form-section active" role="tabpanel" aria-labelledby="issue-tab" aria-hidden="false">
                 <div class="form-container">
-                    <form id="issue-form-element" novalidate aria-label="Issue report form" action="#" method="post">
-                        <fieldset>
-                            <legend class="sr-only">Personal Information</legend>
-                            
+                    <form id="issue-form-element" novalidate>
+                        <div class="form-group">
+                            <label for="issue-name">Full Name <span class="required">*</span></label>
+                            <div class="input-wrapper">
+                                <input type="text" id="issue-name" name="name" required autocomplete="name" data-validation="name">
+                                <div class="validation-icon"></div>
+                            </div>
+                            <div class="error-message" id="issue-name-error" role="alert"></div>
+                        </div>
+
+                        <div class="form-group">
+                            <fieldset>
+                                <legend>Contact Method <span class="required">*</span></legend>
+                                <div class="contact-options">
+                                    <label>
+                                        <input type="radio" name="contact-method" value="email" checked data-target="issue-contact">
+                                        Email
+                                    </label>
+                                    <label>
+                                        <input type="radio" name="contact-method" value="phone" data-target="issue-contact">
+                                        Phone
+                                    </label>
+                                </div>
+                            </fieldset>
+                            <div class="input-wrapper">
+                                <input type="email" id="issue-contact" name="contact" placeholder="Enter your email address" required autocomplete="email" data-validation="email">
+                                <div class="validation-icon"></div>
+                            </div>
+                            <div class="error-message" id="issue-contact-error" role="alert"></div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="booking-details">Booking Details</label>
+                            <input type="text" id="booking-details" name="booking-details" placeholder="Booking reference number or details">
+                        </div>
+
+                        <div class="form-row">
                             <div class="form-group">
-                                <label for="issue-name">Full Name <span class="required" aria-label="required">*</span></label>
+                                <label for="booking-date">Booking Date <span class="required">*</span></label>
                                 <div class="input-wrapper">
-                                    <input type="text" 
-                                           id="issue-name" 
-                                           name="name" 
-                                           required 
-                                           aria-required="true"
-                                           aria-describedby="issue-name-error issue-name-help"
-                                           autocomplete="name"
-                                           data-validation="name">
-                                    <div class="validation-icon" aria-hidden="true"></div>
+                                    <input type="date" id="booking-date" name="booking-date" required data-validation="past-date">
+                                    <div class="validation-icon"></div>
                                 </div>
-                                <div id="issue-name-help" class="sr-only">Enter your full name for contact purposes</div>
-                                <div class="error-message" id="issue-name-error" role="alert" aria-live="polite"></div>
-                                <div class="success-message" id="issue-name-success" aria-live="polite"></div>
+                                <div class="help-text">Select the date of your original booking (past dates allowed)</div>
+                                <div class="error-message" id="booking-date-error" role="alert"></div>
                             </div>
-
                             <div class="form-group">
-                                <fieldset>
-                                    <legend>Contact Method <span class="required" aria-label="required">*</span></legend>
-                                    <div class="contact-options" role="radiogroup" aria-required="true" aria-describedby="contact-method-help">
-                                        <label>
-                                            <input type="radio" 
-                                                   name="contact-method" 
-                                                   value="email" 
-                                                   checked 
-                                                   data-target="issue-contact"
-                                                   aria-describedby="contact-method-help"> 
-                                            <span>Email</span>
-                                        </label>
-                                        <label>
-                                            <input type="radio" 
-                                                   name="contact-method" 
-                                                   value="phone" 
-                                                   data-target="issue-contact"
-                                                   aria-describedby="contact-method-help"> 
-                                            <span>Phone</span>
-                                        </label>
-                                    </div>
-                                    <div id="contact-method-help" class="sr-only">Choose your preferred contact method</div>
-                                </fieldset>
+                                <label for="booking-time">Booking Time <span class="required">*</span></label>
                                 <div class="input-wrapper">
-                                    <input type="email" 
-                                           id="issue-contact" 
-                                           name="contact" 
-                                           placeholder="Enter your email address" 
-                                           required
-                                           aria-required="true"
-                                           aria-describedby="issue-contact-error"
-                                           autocomplete="email"
-                                           data-validation="email"
-                                           aria-label="Contact information">
-                                    <div class="validation-icon" aria-hidden="true"></div>
+                                    <select id="booking-time" name="booking-time" required data-validation="select">
+                                        <option value="">Select time</option>
+                                        <option value="08:00">8:00 AM</option>
+                                        <option value="08:30">8:30 AM</option>
+                                        <option value="09:00">9:00 AM</option>
+                                        <option value="09:30">9:30 AM</option>
+                                        <option value="10:00">10:00 AM</option>
+                                        <option value="10:30">10:30 AM</option>
+                                        <option value="11:00">11:00 AM</option>
+                                        <option value="11:30">11:30 AM</option>
+                                        <option value="12:00">12:00 PM</option>
+                                        <option value="12:30">12:30 PM</option>
+                                        <option value="13:00">1:00 PM</option>
+                                        <option value="13:30">1:30 PM</option>
+                                        <option value="14:00">2:00 PM</option>
+                                        <option value="14:30">2:30 PM</option>
+                                        <option value="15:00">3:00 PM</option>
+                                        <option value="15:30">3:30 PM</option>
+                                        <option value="16:00">4:00 PM</option>
+                                        <option value="16:30">4:30 PM</option>
+                                        <option value="17:00">5:00 PM</option>
+                                        <option value="17:30">5:30 PM</option>
+                                        <option value="18:00">6:00 PM</option>
+                                        <option value="18:30">6:30 PM</option>
+                                        <option value="19:00">7:00 PM</option>
+                                        <option value="19:30">7:30 PM</option>
+                                        <option value="20:00">8:00 PM</option>
+                                        <option value="20:30">8:30 PM</option>
+                                        <option value="21:00">9:00 PM</option>
+                                        <option value="21:30">9:30 PM</option>
+                                        <option value="22:00">10:00 PM</option>
+                                    </select>
+                                    <div class="validation-icon"></div>
                                 </div>
-                                <div class="error-message" id="issue-contact-error" role="alert" aria-live="polite"></div>
-                                <div class="success-message" id="issue-contact-success" aria-live="polite"></div>
+                                <div class="error-message" id="booking-time-error" role="alert"></div>
                             </div>
-                        </fieldset>
+                        </div>
 
-                        <fieldset>
-                            <legend class="sr-only">Booking Information</legend>
-                            
+                        <div class="form-row">
                             <div class="form-group">
-                                <label for="booking-details">Booking Details</label>
+                                <label for="walkin-time">Walk-in Time</label>
                                 <div class="input-wrapper">
-                                    <input type="text" 
-                                           id="booking-details" 
-                                           name="booking-details" 
-                                           placeholder="Booking reference number or details"
-                                           aria-describedby="booking-details-help"
-                                           data-validation="optional">
-                                    <div class="validation-icon" aria-hidden="true"></div>
-                                </div>
-                                <div id="booking-details-help" class="help-text">Optional: Enter any booking reference numbers or details you have</div>
-                            </div>
-
-                            <div class="form-row">
-                                <div class="form-group">
-                                    <label for="booking-date">Booking Date <span class="required" aria-label="required">*</span></label>
-                                    <div class="input-wrapper">
-                                        <input type="date" 
-                                               id="booking-date" 
-                                               name="booking-date" 
-                                               required
-                                               aria-required="true"
-                                               aria-describedby="booking-date-error booking-date-help"
-                                               data-validation="date">
-                                        <div class="validation-icon" aria-hidden="true"></div>
-                                    </div>
-                                    <div id="booking-date-help" class="help-text">Select the date of your original booking</div>
-                                    <div class="error-message" id="booking-date-error" role="alert" aria-live="polite"></div>
-                                    <div class="success-message" id="booking-date-success" aria-live="polite"></div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="booking-time">Booking Time <span class="required" aria-label="required">*</span></label>
-                                    <div class="input-wrapper">
-                                        <input type="time" 
-                                               id="booking-time" 
-                                               name="booking-time" 
-                                               required
-                                               aria-required="true"
-                                               aria-describedby="booking-time-error booking-time-help"
-                                               data-validation="time">
-                                        <div class="validation-icon" aria-hidden="true"></div>
-                                    </div>
-                                    <div id="booking-time-help" class="help-text">Select the time of your original booking</div>
-                                    <div class="error-message" id="booking-time-error" role="alert" aria-live="polite"></div>
-                                    <div class="success-message" id="booking-time-success" aria-live="polite"></div>
+                                    <select id="walkin-time" name="walkin-time">
+                                        <option value="">Select time (optional)</option>
+                                        <option value="08:00">8:00 AM</option>
+                                        <option value="08:30">8:30 AM</option>
+                                        <option value="09:00">9:00 AM</option>
+                                        <option value="09:30">9:30 AM</option>
+                                        <option value="10:00">10:00 AM</option>
+                                        <option value="10:30">10:30 AM</option>
+                                        <option value="11:00">11:00 AM</option>
+                                        <option value="11:30">11:30 AM</option>
+                                        <option value="12:00">12:00 PM</option>
+                                        <option value="12:30">12:30 PM</option>
+                                        <option value="13:00">1:00 PM</option>
+                                        <option value="13:30">1:30 PM</option>
+                                        <option value="14:00">2:00 PM</option>
+                                        <option value="14:30">2:30 PM</option>
+                                        <option value="15:00">3:00 PM</option>
+                                        <option value="15:30">3:30 PM</option>
+                                        <option value="16:00">4:00 PM</option>
+                                        <option value="16:30">4:30 PM</option>
+                                        <option value="17:00">5:00 PM</option>
+                                        <option value="17:30">5:30 PM</option>
+                                        <option value="18:00">6:00 PM</option>
+                                        <option value="18:30">6:30 PM</option>
+                                        <option value="19:00">7:00 PM</option>
+                                        <option value="19:30">7:30 PM</option>
+                                        <option value="20:00">8:00 PM</option>
+                                        <option value="20:30">8:30 PM</option>
+                                        <option value="21:00">9:00 PM</option>
+                                        <option value="21:30">9:30 PM</option>
+                                        <option value="22:00">10:00 PM</option>
+                                    </select>
+                                    <div class="validation-icon"></div>
                                 </div>
                             </div>
-
-                            <div class="form-row">
-                                <div class="form-group">
-                                    <label for="walkin-time">Walk-in Time</label>
-                                    <div class="input-wrapper">
-                                        <input type="time" 
-                                               id="walkin-time" 
-                                               name="walkin-time"
-                                               aria-describedby="walkin-time-help"
-                                               data-validation="optional">
-                                        <div class="validation-icon" aria-hidden="true"></div>
-                                    </div>
-                                    <div id="walkin-time-help" class="help-text">Optional: What time did you actually arrive?</div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="walkout-time">Walk-out Time</label>
-                                    <div class="input-wrapper">
-                                        <input type="time" 
-                                               id="walkout-time" 
-                                               name="walkout-time"
-                                               aria-describedby="walkout-time-help"
-                                               data-validation="optional">
-                                        <div class="validation-icon" aria-hidden="true"></div>
-                                    </div>
-                                    <div id="walkout-time-help" class="help-text">Optional: What time did you leave?</div>
-                                </div>
-                            </div>
-                        </fieldset>
-
-                        <fieldset>
-                            <legend class="sr-only">Issue Details</legend>
-                            
                             <div class="form-group">
-                                <label for="issue-description">Describe Your Issue <span class="required" aria-label="required">*</span></label>
+                                <label for="walkout-time">Walk-out Time</label>
                                 <div class="input-wrapper">
-                                    <textarea id="issue-description" 
-                                              name="issue-description" 
-                                              placeholder="Please provide detailed information about the issue you encountered..." 
-                                              required
-                                              aria-required="true"
-                                              aria-describedby="issue-description-error issue-description-help"
-                                              rows="5"
-                                              data-validation="textarea"
-                                              maxlength="1000"></textarea>
-                                    <div class="validation-icon" aria-hidden="true"></div>
+                                    <select id="walkout-time" name="walkout-time">
+                                        <option value="">Select time (optional)</option>
+                                        <option value="08:00">8:00 AM</option>
+                                        <option value="08:30">8:30 AM</option>
+                                        <option value="09:00">9:00 AM</option>
+                                        <option value="09:30">9:30 AM</option>
+                                        <option value="10:00">10:00 AM</option>
+                                        <option value="10:30">10:30 AM</option>
+                                        <option value="11:00">11:00 AM</option>
+                                        <option value="11:30">11:30 AM</option>
+                                        <option value="12:00">12:00 PM</option>
+                                        <option value="12:30">12:30 PM</option>
+                                        <option value="13:00">1:00 PM</option>
+                                        <option value="13:30">1:30 PM</option>
+                                        <option value="14:00">2:00 PM</option>
+                                        <option value="14:30">2:30 PM</option>
+                                        <option value="15:00">3:00 PM</option>
+                                        <option value="15:30">3:30 PM</option>
+                                        <option value="16:00">4:00 PM</option>
+                                        <option value="16:30">4:30 PM</option>
+                                        <option value="17:00">5:00 PM</option>
+                                        <option value="17:30">5:30 PM</option>
+                                        <option value="18:00">6:00 PM</option>
+                                        <option value="18:30">6:30 PM</option>
+                                        <option value="19:00">7:00 PM</option>
+                                        <option value="19:30">7:30 PM</option>
+                                        <option value="20:00">8:00 PM</option>
+                                        <option value="20:30">8:30 PM</option>
+                                        <option value="21:00">9:00 PM</option>
+                                        <option value="21:30">9:30 PM</option>
+                                        <option value="22:00">10:00 PM</option>
+                                    </select>
+                                    <div class="validation-icon"></div>
                                 </div>
-                                <div class="char-count" id="issue-description-count">0/1000 characters</div>
-                                <div id="issue-description-help" class="help-text">Provide detailed information about the issue you experienced, including what happened and when</div>
-                                <div class="error-message" id="issue-description-error" role="alert" aria-live="polite"></div>
-                                <div class="success-message" id="issue-description-success" aria-live="polite"></div>
                             </div>
-                        </fieldset>
+                        </div>
 
-                        <button type="submit" 
-                                class="submit-btn" 
-                                id="issue-submit"
-                                aria-describedby="issue-submit-help">
+                        <div class="form-group">
+                            <label for="issue-description">Describe Your Issue <span class="required">*</span></label>
+                            <div class="input-wrapper">
+                                <textarea id="issue-description" name="issue-description" placeholder="Please provide detailed information about the issue you encountered..." required rows="5" maxlength="1000" data-validation="textarea"></textarea>
+                                <div class="validation-icon"></div>
+                            </div>
+                            <div class="char-count" id="issue-description-count">0/1000 characters</div>
+                            <div class="error-message" id="issue-description-error" role="alert"></div>
+                        </div>
+
+                        <button type="submit" class="submit-btn" id="issue-submit">
                             <span class="btn-text">Submit Issue Report</span>
-                            <span class="loading" aria-hidden="true"></span>
+                            <span class="loading"></span>
                         </button>
-                        <div id="issue-submit-help" class="sr-only">Submit your issue report to our support team</div>
                     </form>
                 </div>
             </section>
@@ -240,154 +225,117 @@
             <!-- Enquiry Form -->
             <section id="enquiry-form" class="form-section" role="tabpanel" aria-labelledby="enquiry-tab" aria-hidden="true">
                 <div class="form-container">
-                    <form id="enquiry-form-element" novalidate aria-label="Enquiry form" action="#" method="post">
-                        <fieldset>
-                            <legend class="sr-only">Personal Information</legend>
-                            
-                            <div class="form-group">
-                                <label for="enquiry-name">Full Name <span class="required" aria-label="required">*</span></label>
-                                <div class="input-wrapper">
-                                    <input type="text" 
-                                           id="enquiry-name" 
-                                           name="name" 
-                                           required
-                                           aria-required="true"
-                                           aria-describedby="enquiry-name-error enquiry-name-help"
-                                           autocomplete="name"
-                                           data-validation="name">
-                                    <div class="validation-icon" aria-hidden="true"></div>
-                                </div>
-                                <div id="enquiry-name-help" class="sr-only">Enter your full name for contact purposes</div>
-                                <div class="error-message" id="enquiry-name-error" role="alert" aria-live="polite"></div>
-                                <div class="success-message" id="enquiry-name-success" aria-live="polite"></div>
+                    <form id="enquiry-form-element" novalidate>
+                        <div class="form-group">
+                            <label for="enquiry-name">Full Name <span class="required">*</span></label>
+                            <div class="input-wrapper">
+                                <input type="text" id="enquiry-name" name="name" required autocomplete="name" data-validation="name">
+                                <div class="validation-icon"></div>
                             </div>
+                            <div class="error-message" id="enquiry-name-error" role="alert"></div>
+                        </div>
 
-                            <div class="form-group">
-                                <label for="enquiry-phone">Contact Number <span class="required" aria-label="required">*</span></label>
-                                <div class="input-wrapper">
-                                    <input type="tel" 
-                                           id="enquiry-phone" 
-                                           name="contact-number" 
-                                           placeholder="Enter your phone number" 
-                                           required
-                                           aria-required="true"
-                                           aria-describedby="enquiry-phone-error enquiry-phone-help"
-                                           autocomplete="tel"
-                                           data-validation="phone">
-                                    <div class="validation-icon" aria-hidden="true"></div>
-                                </div>
-                                <div id="enquiry-phone-help" class="help-text">Enter your phone number including country code if international</div>
-                                <div class="error-message" id="enquiry-phone-error" role="alert" aria-live="polite"></div>
-                                <div class="success-message" id="enquiry-phone-success" aria-live="polite"></div>
+                        <div class="form-group">
+                            <label for="enquiry-phone">Contact Number <span class="required">*</span></label>
+                            <div class="input-wrapper">
+                                <input type="tel" id="enquiry-phone" name="contact-number" placeholder="Enter your phone number" required autocomplete="tel" data-validation="phone">
+                                <div class="validation-icon"></div>
                             </div>
-                        </fieldset>
+                            <div class="error-message" id="enquiry-phone-error" role="alert"></div>
+                        </div>
 
-                        <fieldset>
-                            <legend class="sr-only">Booking Preferences</legend>
-                            
-                            <div class="form-row">
-                                <div class="form-group">
-                                    <label for="enquiry-date">Preferred Date <span class="required" aria-label="required">*</span></label>
-                                    <div class="input-wrapper">
-                                        <input type="date" 
-                                               id="enquiry-date" 
-                                               name="booking-date" 
-                                               required
-                                               aria-required="true"
-                                               aria-describedby="enquiry-date-error enquiry-date-help"
-                                               data-validation="date">
-                                        <div class="validation-icon" aria-hidden="true"></div>
-                                    </div>
-                                    <div id="enquiry-date-help" class="help-text">Select your preferred booking date</div>
-                                    <div class="error-message" id="enquiry-date-error" role="alert" aria-live="polite"></div>
-                                    <div class="success-message" id="enquiry-date-success" aria-live="polite"></div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="enquiry-time">Preferred Time <span class="required" aria-label="required">*</span></label>
-                                    <div class="input-wrapper">
-                                        <input type="time" 
-                                               id="enquiry-time" 
-                                               name="booking-time" 
-                                               required
-                                               aria-required="true"
-                                               aria-describedby="enquiry-time-error enquiry-time-help"
-                                               data-validation="time">
-                                        <div class="validation-icon" aria-hidden="true"></div>
-                                    </div>
-                                    <div id="enquiry-time-help" class="help-text">Select your preferred booking time</div>
-                                    <div class="error-message" id="enquiry-time-error" role="alert" aria-live="polite"></div>
-                                    <div class="success-message" id="enquiry-time-success" aria-live="polite"></div>
-                                </div>
-                            </div>
-
+                        <div class="form-row">
                             <div class="form-group">
-                                <label for="people-count">Number of People <span class="required" aria-label="required">*</span></label>
+                                <label for="enquiry-date">Preferred Date <span class="required">*</span></label>
                                 <div class="input-wrapper">
-                                    <select id="people-count" 
-                                            name="people-count" 
-                                            required
-                                            aria-required="true"
-                                            aria-describedby="people-count-error people-count-help"
-                                            data-validation="select">
-                                        <option value="">Select number of people</option>
-                                        <option value="1">1 person</option>
-                                        <option value="2">2 people</option>
-                                        <option value="3">3 people</option>
-                                        <option value="4">4 people</option>
-                                        <option value="5">5 people</option>
-                                        <option value="6">6 people</option>
-                                        <option value="7">7 people</option>
-                                        <option value="8">8 people</option>
-                                        <option value="9">9 people</option>
-                                        <option value="10+">10+ people</option>
+                                    <input type="date" id="enquiry-date" name="booking-date" required data-validation="future-date">
+                                    <div class="validation-icon"></div>
+                                </div>
+                                <div class="help-text">Select your preferred booking date (future dates only)</div>
+                                <div class="error-message" id="enquiry-date-error" role="alert"></div>
+                            </div>
+                            <div class="form-group">
+                                <label for="enquiry-time">Preferred Time <span class="required">*</span></label>
+                                <div class="input-wrapper">
+                                    <select id="enquiry-time" name="booking-time" required data-validation="select">
+                                        <option value="">Select time</option>
+                                        <option value="08:00">8:00 AM</option>
+                                        <option value="08:30">8:30 AM</option>
+                                        <option value="09:00">9:00 AM</option>
+                                        <option value="09:30">9:30 AM</option>
+                                        <option value="10:00">10:00 AM</option>
+                                        <option value="10:30">10:30 AM</option>
+                                        <option value="11:00">11:00 AM</option>
+                                        <option value="11:30">11:30 AM</option>
+                                        <option value="12:00">12:00 PM</option>
+                                        <option value="12:30">12:30 PM</option>
+                                        <option value="13:00">1:00 PM</option>
+                                        <option value="13:30">1:30 PM</option>
+                                        <option value="14:00">2:00 PM</option>
+                                        <option value="14:30">2:30 PM</option>
+                                        <option value="15:00">3:00 PM</option>
+                                        <option value="15:30">3:30 PM</option>
+                                        <option value="16:00">4:00 PM</option>
+                                        <option value="16:30">4:30 PM</option>
+                                        <option value="17:00">5:00 PM</option>
+                                        <option value="17:30">5:30 PM</option>
+                                        <option value="18:00">6:00 PM</option>
+                                        <option value="18:30">6:30 PM</option>
+                                        <option value="19:00">7:00 PM</option>
+                                        <option value="19:30">7:30 PM</option>
+                                        <option value="20:00">8:00 PM</option>
+                                        <option value="20:30">8:30 PM</option>
+                                        <option value="21:00">9:00 PM</option>
+                                        <option value="21:30">9:30 PM</option>
+                                        <option value="22:00">10:00 PM</option>
                                     </select>
-                                    <div class="validation-icon" aria-hidden="true"></div>
+                                    <div class="validation-icon"></div>
                                 </div>
-                                <div id="people-count-help" class="help-text">Select the total number of people for your booking</div>
-                                <div class="error-message" id="people-count-error" role="alert" aria-live="polite"></div>
-                                <div class="success-message" id="people-count-success" aria-live="polite"></div>
+                                <div class="error-message" id="enquiry-time-error" role="alert"></div>
                             </div>
-                        </fieldset>
+                        </div>
 
-                        <fieldset>
-                            <legend class="sr-only">Enquiry Details</legend>
-                            
-                            <div class="form-group">
-                                <label for="enquiry-description">Tell Us More About Your Enquiry <span class="required" aria-label="required">*</span></label>
-                                <div class="input-wrapper">
-                                    <textarea id="enquiry-description" 
-                                              name="enquiry-description" 
-                                              placeholder="Please provide details about your enquiry, special requirements, or any questions you have..." 
-                                              required
-                                              aria-required="true"
-                                              aria-describedby="enquiry-description-error enquiry-description-help"
-                                              rows="5"
-                                              data-validation="textarea"
-                                              maxlength="1000"></textarea>
-                                    <div class="validation-icon" aria-hidden="true"></div>
-                                </div>
-                                <div class="char-count" id="enquiry-description-count">0/1000 characters</div>
-                                <div id="enquiry-description-help" class="help-text">Provide details about your enquiry, including any special requirements or questions</div>
-                                <div class="error-message" id="enquiry-description-error" role="alert" aria-live="polite"></div>
-                                <div class="success-message" id="enquiry-description-success" aria-live="polite"></div>
+                        <div class="form-group">
+                            <label for="people-count">Number of People <span class="required">*</span></label>
+                            <div class="input-wrapper">
+                                <select id="people-count" name="people-count" required data-validation="select">
+                                    <option value="">Select number of people</option>
+                                    <option value="1">1 person</option>
+                                    <option value="2">2 people</option>
+                                    <option value="3">3 people</option>
+                                    <option value="4">4 people</option>
+                                    <option value="5">5 people</option>
+                                    <option value="6">6 people</option>
+                                    <option value="7">7 people</option>
+                                    <option value="8">8 people</option>
+                                    <option value="9">9 people</option>
+                                    <option value="10+">10+ people</option>
+                                </select>
+                                <div class="validation-icon"></div>
                             </div>
-                        </fieldset>
+                            <div class="error-message" id="people-count-error" role="alert"></div>
+                        </div>
 
-                        <button type="submit" 
-                                class="submit-btn" 
-                                id="enquiry-submit"
-                                aria-describedby="enquiry-submit-help">
+                        <div class="form-group">
+                            <label for="enquiry-description">Tell Us More About Your Enquiry <span class="required">*</span></label>
+                            <div class="input-wrapper">
+                                <textarea id="enquiry-description" name="enquiry-description" placeholder="Please provide details about your enquiry, special requirements, or any questions you have..." required rows="5" maxlength="1000" data-validation="textarea"></textarea>
+                                <div class="validation-icon"></div>
+                            </div>
+                            <div class="char-count" id="enquiry-description-count">0/1000 characters</div>
+                            <div class="error-message" id="enquiry-description-error" role="alert"></div>
+                        </div>
+
+                        <button type="submit" class="submit-btn" id="enquiry-submit">
                             <span class="btn-text">Submit Enquiry</span>
-                            <span class="loading" aria-hidden="true"></span>
+                            <span class="loading"></span>
                         </button>
-                        <div id="enquiry-submit-help" class="sr-only">Submit your enquiry to our team</div>
                     </form>
                 </div>
             </section>
         </main>
     </div>
 
-    <!-- External JavaScript -->
     <script src="script.js"></script>
 </body>
 </html>
