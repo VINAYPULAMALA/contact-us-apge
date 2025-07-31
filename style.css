@@ -1,9 +1,6 @@
-/* ==========================================================================
-   CONTACT FORM STYLES - styles.css
-   Casa de Amor Contact Form Stylesheet
-   ========================================================================== */
+/* Contact Form Styles - Optimized Version */
 
-/* CSS Custom Properties */
+/* CSS Variables */
 :root {
     --primary-color: #3498db;
     --primary-dark: #2980b9;
@@ -16,29 +13,22 @@
     --text-color: #2c3e50;
     --text-muted: #6c757d;
     --border-radius: 10px;
-    --border-radius-lg: 20px;
-    --spacing-xs: 5px;
     --spacing-sm: 10px;
     --spacing-md: 15px;
     --spacing-lg: 20px;
     --spacing-xl: 25px;
     --spacing-xxl: 40px;
-    --font-size-sm: 0.85rem;
-    --font-size-base: 1rem;
-    --font-size-lg: 1.1rem;
     --transition: all 0.3s ease;
 }
 
-/* ==========================================================================
-   RESET AND BASE STYLES
-   ========================================================================== */
-
+/* Reset */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
+/* Base Styles */
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
@@ -47,26 +37,21 @@ body {
     line-height: 1.6;
 }
 
-/* ==========================================================================
-   LAYOUT COMPONENTS
-   ========================================================================== */
-
 /* Container */
 .container {
-    width: min(800px, 95vw);
+    max-width: 800px;
     margin: 0 auto;
     background: white;
-    border-radius: var(--border-radius-lg);
+    border-radius: var(--spacing-lg);
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
     overflow: hidden;
-    min-height: 0;
 }
 
 /* Header */
 .header {
     background: linear-gradient(135deg, var(--secondary-color) 0%, var(--primary-color) 100%);
     color: white;
-    padding: var(--spacing-xxl) calc(var(--spacing-lg) + var(--spacing-md));
+    padding: var(--spacing-xxl);
     text-align: center;
 }
 
@@ -81,10 +66,7 @@ body {
     opacity: 0.9;
 }
 
-/* ==========================================================================
-   TAB NAVIGATION
-   ========================================================================== */
-
+/* Tab Navigation */
 .form-tabs {
     display: flex;
     background: var(--light-bg);
@@ -128,12 +110,9 @@ body {
     background: var(--primary-color);
 }
 
-/* ==========================================================================
-   FORM SECTIONS
-   ========================================================================== */
-
+/* Form Sections */
 .form-container {
-    padding: var(--spacing-xxl) calc(var(--spacing-lg) + var(--spacing-md));
+    padding: var(--spacing-xxl);
 }
 
 .form-section {
@@ -146,30 +125,16 @@ body {
 }
 
 @keyframes fadeIn {
-    from { 
-        opacity: 0; 
-        transform: translateY(10px); 
-    }
-    to { 
-        opacity: 1; 
-        transform: translateY(0); 
-    }
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
-/* ==========================================================================
-   FORM ELEMENTS
-   ========================================================================== */
-
+/* Form Elements */
 .form-group {
     margin-bottom: var(--spacing-xl);
 }
 
 .form-row {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -ms-flex-wrap: wrap;
-    flex-wrap: wrap;
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: var(--spacing-lg);
@@ -177,9 +142,6 @@ body {
 }
 
 .form-row .form-group {
-    -webkit-box-flex: 1;
-    -ms-flex: 1;
-    flex: 1;
     margin-bottom: 0;
 }
 
@@ -204,15 +166,12 @@ label {
     font-size: 0.95rem;
 }
 
-/* ==========================================================================
-   INPUT WRAPPER AND VALIDATION ICONS
-   ========================================================================== */
-
+/* Input Wrapper & Validation */
 .input-wrapper {
     position: relative;
 }
 
-.input-wrapper .validation-icon {
+.validation-icon {
     position: absolute;
     right: 12px;
     top: 50%;
@@ -221,10 +180,9 @@ label {
     height: 20px;
     opacity: 0;
     transition: opacity 0.3s ease;
-    z-index: 2;
 }
 
-.input-wrapper .validation-icon::before {
+.validation-icon::before {
     content: '';
     position: absolute;
     width: 20px;
@@ -232,7 +190,6 @@ label {
     border-radius: 50%;
 }
 
-/* Valid State */
 .input-wrapper.valid .validation-icon {
     opacity: 1;
 }
@@ -252,7 +209,6 @@ label {
     transform: translate(-50%, -50%);
 }
 
-/* Invalid State */
 .input-wrapper.invalid .validation-icon {
     opacity: 1;
 }
@@ -272,33 +228,25 @@ label {
     transform: translate(-50%, -50%);
 }
 
-/* ==========================================================================
-   FORM INPUTS
-   ========================================================================== */
-
-input, 
-textarea, 
-select {
+/* Form Inputs */
+input, textarea, select {
     width: 100%;
     padding: var(--spacing-md);
     border: 2px solid var(--border-color);
     border-radius: var(--border-radius);
-    font-size: var(--font-size-base);
+    font-size: 1rem;
     transition: var(--transition);
     background: var(--light-bg);
     font-family: inherit;
 }
 
-input:focus, 
-textarea:focus, 
-select:focus {
+input:focus, textarea:focus, select:focus {
     outline: none;
     border-color: var(--primary-color);
     background: white;
     box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
 }
 
-/* Input states with validation */
 .input-wrapper.valid input,
 .input-wrapper.valid textarea,
 .input-wrapper.valid select {
@@ -318,23 +266,10 @@ select:focus {
 textarea {
     resize: vertical;
     min-height: 120px;
-    font-family: inherit;
 }
 
-select {
-    cursor: pointer;
-}
-
-/* ==========================================================================
-   CONTACT OPTIONS (RADIO BUTTONS)
-   ========================================================================== */
-
+/* Contact Options */
 .contact-options {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -ms-flex-wrap: wrap;
-    flex-wrap: wrap;
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
     gap: var(--spacing-md);
@@ -362,10 +297,6 @@ select {
     border-color: var(--primary-color);
 }
 
-.contact-options input[type="radio"]:checked + span {
-    font-weight: 600;
-}
-
 .contact-options input[type="radio"] {
     width: auto;
     margin: 0;
@@ -373,47 +304,30 @@ select {
     min-height: 16px;
 }
 
-/* ==========================================================================
-   MESSAGE STYLES
-   ========================================================================== */
-
+/* Messages */
 .error-message {
     color: var(--error-color);
-    font-size: var(--font-size-sm);
-    margin-top: var(--spacing-xs);
+    font-size: 0.85rem;
+    margin-top: 5px;
     display: none;
-    padding: var(--spacing-xs) var(--spacing-sm);
+    padding: 5px var(--spacing-sm);
     background: #fff5f5;
-    border-radius: var(--spacing-xs);
+    border-radius: 5px;
     border-left: 3px solid var(--error-color);
-    font-weight: 500;
-}
-
-.success-message {
-    color: var(--success-color);
-    font-size: var(--font-size-sm);
-    margin-top: var(--spacing-xs);
-    display: none;
-    padding: var(--spacing-xs) var(--spacing-sm);
-    background: #f8fff8;
-    border-radius: var(--spacing-xs);
-    border-left: 3px solid var(--success-color);
-    font-weight: 500;
 }
 
 .help-text {
     color: var(--text-muted);
-    font-size: var(--font-size-sm);
-    margin-top: var(--spacing-xs);
-    line-height: 1.4;
+    font-size: 0.8rem;
+    margin-top: 5px;
+    font-style: italic;
 }
 
 .char-count {
-    font-size: var(--font-size-sm);
+    font-size: 0.8rem;
     color: var(--text-muted);
     text-align: right;
-    margin-top: var(--spacing-xs);
-    font-weight: 500;
+    margin-top: 5px;
 }
 
 .char-count.warning {
@@ -424,23 +338,18 @@ select {
     color: var(--error-color);
 }
 
-/* Required Field Indicator */
 .required {
     color: var(--error-color);
-    font-weight: bold;
 }
 
-/* ==========================================================================
-   SUBMIT BUTTON
-   ========================================================================== */
-
+/* Submit Button */
 .submit-btn {
     background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
     color: white;
     padding: 18px var(--spacing-xxl);
     border: none;
     border-radius: 50px;
-    font-size: var(--font-size-lg);
+    font-size: 1.1rem;
     font-weight: 600;
     cursor: pointer;
     transition: var(--transition);
@@ -451,16 +360,11 @@ select {
     display: flex;
     align-items: center;
     justify-content: center;
-    position: relative;
 }
 
 .submit-btn:hover:not(:disabled) {
     transform: translateY(-2px);
     box-shadow: 0 10px 25px rgba(52, 152, 219, 0.3);
-}
-
-.submit-btn:active:not(:disabled) {
-    transform: translateY(-1px);
 }
 
 .submit-btn:disabled {
@@ -480,10 +384,6 @@ select {
     margin-left: var(--spacing-sm);
 }
 
-.submit-btn.loading .btn-text {
-    opacity: 0.7;
-}
-
 .submit-btn.loading .loading {
     display: inline-block;
 }
@@ -493,17 +393,12 @@ select {
     100% { transform: rotate(360deg); }
 }
 
-/* Popup Close Button Override */
 .popup-close-btn {
     width: auto;
-    margin-top: var(--spacing-lg);
     padding: var(--spacing-sm) var(--spacing-xxl);
 }
 
-/* ==========================================================================
-   POPUP STYLES
-   ========================================================================== */
-
+/* Popup */
 .popup-overlay {
     position: fixed;
     top: 0;
@@ -513,7 +408,6 @@ select {
     background: rgba(0, 0, 0, 0.5);
     z-index: 999;
     display: none;
-    -webkit-backdrop-filter: blur(2px);
     backdrop-filter: blur(2px);
 }
 
@@ -545,10 +439,7 @@ select {
     color: var(--text-color);
 }
 
-/* ==========================================================================
-   ACCESSIBILITY ENHANCEMENTS
-   ========================================================================== */
-
+/* Accessibility */
 .sr-only {
     position: absolute;
     width: 1px;
@@ -571,64 +462,28 @@ select {
     text-decoration: none;
     border-radius: 4px;
     z-index: 1000;
-    font-weight: 600;
 }
 
 .skip-link:focus {
     top: 6px;
 }
 
-/* Focus Management */
 *:focus {
     outline: 2px solid var(--primary-color);
     outline-offset: 2px;
 }
 
-.tab-button:focus,
-.submit-btn:focus,
-input:focus,
-textarea:focus,
-select:focus {
-    outline: 2px solid var(--primary-color);
-    outline-offset: 2px;
-}
-
-/* ==========================================================================
-   RESPONSIVE DESIGN
-   ========================================================================== */
-
-/* Large screens (1200px and up) */
+/* Responsive Design */
 @media (min-width: 1200px) {
     .container {
         max-width: 900px;
     }
-    
     .form-container {
-        padding: 50px 40px;
-    }
-    
-    .header {
         padding: 50px 40px;
     }
 }
 
-/* Medium screens (768px to 1199px) */
-@media (min-width: 768px) and (max-width: 1199px) {
-    .container {
-        max-width: 90%;
-    }
-    
-    .header {
-        padding: 35px 25px;
-    }
-    
-    .form-container {
-        padding: 35px 25px;
-    }
-}
-
-/* Small screens (576px to 767px) */
-@media (min-width: 576px) and (max-width: 767px) {
+@media (max-width: 767px) {
     body {
         padding: var(--spacing-md);
     }
@@ -640,49 +495,19 @@ select:focus {
     .contact-options {
         grid-template-columns: 1fr;
     }
-    
-    .tab-button {
-        padding: var(--spacing-md) var(--spacing-sm);
-        font-size: 1rem;
-    }
-    
-    input, textarea, select {
-        padding: 14px;
-        font-size: 0.95rem;
-    }
-    
-    .submit-btn {
-        padding: 16px 35px;
-        font-size: 1rem;
-    }
 }
 
-/* Extra small screens (up to 575px) */
 @media (max-width: 575px) {
     body {
         padding: var(--spacing-sm);
     }
     
-    .container {
-        border-radius: var(--spacing-md);
-    }
-    
     .header {
         padding: 25px var(--spacing-md);
     }
     
     .form-container {
         padding: 25px var(--spacing-md);
-    }
-    
-    .form-row {
-        grid-template-columns: 1fr;
-        gap: var(--spacing-sm);
-    }
-    
-    .contact-options {
-        grid-template-columns: 1fr;
-        gap: var(--spacing-sm);
     }
     
     .tab-button {
@@ -691,106 +516,24 @@ select:focus {
         min-height: 50px;
     }
     
-    .form-group {
-        margin-bottom: var(--spacing-lg);
-    }
-    
-    label {
-        font-size: 0.9rem;
-        margin-bottom: 6px;
-    }
-    
     input, textarea, select {
         padding: 12px;
         font-size: 0.9rem;
-        border-radius: 8px;
-    }
-    
-    textarea {
-        min-height: 100px;
     }
     
     .submit-btn {
         padding: 15px 30px;
         font-size: 0.95rem;
-        border-radius: 40px;
-        margin-top: 15px;
         min-height: 50px;
     }
     
     .success-popup {
         padding: 25px 20px;
-        border-radius: 12px;
         max-width: 95%;
     }
-    
-    .success-popup h3 {
-        font-size: 1.2rem;
-        margin-bottom: var(--spacing-sm);
-    }
-    
-    .success-popup p {
-        font-size: 0.9rem;
-        line-height: 1.4;
-    }
 }
 
-/* Ultra small screens (up to 375px) */
-@media (max-width: 375px) {
-    .header h1 {
-        font-size: 1.6rem;
-    }
-    
-    .form-container {
-        padding: 20px 12px;
-    }
-    
-    .tab-button {
-        padding: 12px 8px;
-        font-size: 0.85rem;
-    }
-    
-    input, textarea, select {
-        padding: 10px;
-        font-size: 0.85rem;
-    }
-    
-    .submit-btn {
-        padding: 12px 25px;
-        font-size: 0.9rem;
-    }
-}
-
-/* Landscape orientation adjustments for phones */
-@media (max-height: 500px) and (orientation: landscape) {
-    .header {
-        padding: 20px 25px;
-    }
-    
-    .header h1 {
-        font-size: 1.8rem;
-        margin-bottom: 5px;
-    }
-    
-    .form-container {
-        padding: 25px 20px;
-    }
-    
-    .form-group {
-        margin-bottom: 15px;
-    }
-    
-    .success-popup {
-        max-height: 80vh;
-        overflow-y: auto;
-    }
-}
-
-/* ==========================================================================
-   ACCESSIBILITY MEDIA QUERIES
-   ========================================================================== */
-
-/* High contrast mode support */
+/* High Contrast & Accessibility */
 @media (prefers-contrast: high) {
     input, textarea, select {
         border-width: 3px;
@@ -800,20 +543,14 @@ select:focus {
         height: 4px;
     }
     
-    .submit-btn {
-        border: 2px solid white;
-    }
-    
     .contact-options label {
         border-width: 3px;
     }
 }
 
-/* Reduced motion preferences */
 @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after {
         animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
         transition-duration: 0.01ms !important;
     }
     
@@ -822,81 +559,15 @@ select:focus {
     }
 }
 
-/* Dark mode support */
-@media (prefers-color-scheme: dark) {
-    body {
-        background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
-    }
-}
-
-/* ==========================================================================
-   PRINT STYLES
-   ========================================================================== */
-
-@media print {
-    body {
-        background: white;
-        padding: 0;
-    }
-    
-    .container {
-        box-shadow: none;
-        border: 1px solid #ccc;
-    }
-    
-    .header {
-        background: var(--light-bg) !important;
-        color: var(--text-color) !important;
-    }
-    
-    .submit-btn, 
-    .loading,
-    .popup-overlay,
-    .success-popup {
-        display: none;
-    }
-    
-    .form-section {
-        display: block !important;
-    }
-    
-    .form-tabs {
-        display: none;
-    }
-}
-
-/* ==========================================================================
-   TOUCH DEVICE IMPROVEMENTS
-   ========================================================================== */
-
+/* Touch Devices */
 @media (hover: none) and (pointer: coarse) {
     .tab-button, 
     .submit-btn, 
     .contact-options label {
         min-height: 44px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
     }
     
     input, textarea, select {
         min-height: 48px;
-    }
-    
-    .contact-options input[type="radio"] {
-        width: 20px;
-        height: 20px;
-        min-height: 20px;
-    }
-    
-    /* Larger touch targets for mobile */
-    .validation-icon {
-        width: 24px;
-        height: 24px;
-    }
-    
-    .validation-icon::before {
-        width: 24px;
-        height: 24px;
     }
 }
